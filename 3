@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... Rest of the head section ... -->
+    <style>
+        /* ... Rest of the styles ... */
+
+        /* Add the animation styles */
+        @keyframes slideUp {
+            0% {
+                transform: translateY(0%);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+        }
+
+        .animate-slide-up {
+            animation: slideUp 2s forwards;
+        }
+
+        /* ... Rest of the styles ... */
+    </style>
+</head>
+<body>
+    <!-- Add the home page section -->
+    <div id="welcome" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-opacity-100 bg-white animate-slide-up">
+        <div class="welcome-container">
+            <h1 class="welcome-text mb-4" style="color: black;">Recipe Adaptation</h1>
+            <form id="home-form" class="w-full max-w-lg mx-auto">
+                <div class="py-2">
+                    <label for="home-link" class="block">Welcome to Recipe Adaptation for Dietary Restrictions</label>
+                    <input id="home-link" class="w-full mt-1 p-1 border border-black bg-white" type="text" required>
+                </div>
+                <div class="py-2">
+                    <button type="button" class="px-4 py-2 rounded text-white button-color hover:bg-white hover:text-black hover:border-beb7a4" onclick="showMainPage()">Get Started</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ... Rest of the code ... -->
+
+    <script>
+        // ... Rest of the code ...
+
+        // Function to show the main page and hide the welcome page
+        const showMainPage = () => {
+            const welcomePage = document.getElementById("welcome");
+            const mainPage = document.getElementById("main-page");
+
+            welcomePage.style.display = "none"; // Hide the welcome page
+            mainPage.style.display = "block"; // Show the main page
+        };
+    </script>
+</body>
+</html>
