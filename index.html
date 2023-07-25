@@ -32,6 +32,17 @@
         #splash {
           transition: transform 1.5s ease-in-out;
         }
+
+        /* ... Rest of the styles ... */
+
+        /* Add styles to the output box */
+        #output {
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+        
+        }
     </style>
     <title>RecipeReference</title>
 </head>
@@ -76,7 +87,7 @@
         }
 
         async function onAnimationEnd() {
-            await sleep(1500);
+            await sleep(2000);
             document.getElementById("splash").style.transform = "translateY(-100%)";
             document.getElementById("main").classList.remove("hidden");
         }
