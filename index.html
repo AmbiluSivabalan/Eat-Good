@@ -4,105 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.3/dist/tailwind.min.css" rel="stylesheet">
-    <title>Recipe Modification</title>
-</head>
-<body class="bg-gray-100 min-h-screen flex flex-col text-black">
-    <div id="home" class="fixed top-0 left-0 w-full h-full bg-white flex items-center justify-center text-center">
-        <div>
-            <div>Eat Food?</div>
-            <div class="text-green-800">Might as well Eat Good</div>
-        </div>
-    </div>
-   <main class="container mx-auto flex-grow p-4">
-        <h1 class="text-2xl font-bold mb-4">
-            <span>Recipe</span><span class="text-green-800">Refined</span>
-        </h1>
     <style>
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #fffffc;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f3f2e8;
+            margin: 0;
+            height: 100vh;
+            min-height: 100%;
         }
-        h1 {
-            font-size: 2rem;
-            color: #000000;
+        @keyframes slideUp {
+            0% {
+                transform: translateY(0%);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
         }
-        label, input, textarea {
-            color: #000000;
+        .animate-slide-up {
+            animation: slideUp 1s forwards;
         }
-        .footer-link {
-            color: #000000;
-            text-decoration: underline;
+        .welcome-text {
+            font-weight: 300;
+            font-size: 1.5rem;
         }
-        .button-color {
-          background-color: #000000;
-          color: #fffffc;
-          border: 2px solid #beb7a4;
+        .welcome-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
         }
-        .button-hover {
-          background-color: #fffffc;
-          color: #000000;
-          border: 2px solid #beb7a4;
-        }
-
     </style>
+    <title>RecipeRefined</title>
 </head>
-<body>
-    <div class="container mx-auto px-4">
-        <h1 class="text-center my-12">Recipe Adaptation for Dietary Restrictions</h1>
-        <form id="recipe-form" class="w-full max-w-lg mx-auto">
-            <div class="py-2">
-                <label for="recipe-link" class="block">Link to the Recipe</label>
-                <input id="recipe-link" class="w-full mt-1 p-1 border border-black bg-white" type="text" required>
-            </div>
-            <div class="py-2">
-                <label for="dietary-restrictions" class="block">Dietary Restrictions or Preferences</label>
-                <textarea id="dietary-restrictions" class="w-full mt-1 p-1 border border-black bg-white h-20" required></textarea>
-            </div>
-            <div class="py-2">
-                <button type="submit" class="px-4 py-2 rounded text-white button-color hover:bg-white hover:text-black hover:border-beb7a4">Cook up some magic! 🧙</button>
-            </div>
-        </form>
-        <div class="output my-8 p-4 w-full max-w-lg mx-auto border border-black bg-white">
-            <!-- Output data will be appended here -->
+<body class="text-white">
+    <div id="welcome" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-opacity-100 bg-gray-800">
+        <div class="welcome-container">
+            <h1 class="welcome-text mb-4" style="color: black;">Eat Food</h1>
+            <h2 class="welcome-text" style="color: green;">Might as well Eat Good</h2>
         </div>
-        <footer class="text-center my-8">
-            <a href="#" class="footer-link">Made with ❤️</a>
+    </div>
+    <header class="mt-10 mb-4 px-4">
+        <h1 class="text-4xl font-bold">
+            <span class="text-black">Recipe</span><span class="text-green-500">Refined</span>
+        </h1>
+    </header>
+    <div class="container mx-auto px-4">
+        <form id="recipe-form" class="mb-6">
+            <div>
+                <label for="recipe-link" class="block mb-2">Link to the Recipe:</label>
+                <input id="recipe-link" type="url" class="block w-full p-2 border border-gray-600 rounded" required>
+            </div>
+            <div class="mt-6">
+                <label for="restrictions" class="block mb-2">Dietary Restrictions/Preferences:</label>
+                <input id="restrictions" type="text" class="block w-full p-2 border border-gray-600 rounded" required>
+            </div>
+            <button type="submit" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded text-white mt-6">Refine My Recipe!</button>
+        </form>
+        <pre id="output" class="bg-gray-800 rounded p-4 text-white mb-6"></pre>
+        <footer class="text-center">
+            <a href="#" class="text-red-500">Made with ❤️</a>
         </footer>
     </div>
     <script>
-        const form = document.getElementById("recipe-form");
-        const recipeLink = document.getElementById("recipe-link");
-        const dietaryRestrictions = document.getElementById("dietary-restrictions");
-        const output = document.querySelector(".output");
+        const welcomeAnimation = () => {
+            setTimeout(() => {
+                document.getElementById('welcome').classList.add('animate-slide-up');
+            }, 1000);
+        };
 
-        form.addEventListener("submit", (event) => {
+        const sendRequest = (event) => {
             event.preventDefault();
-            output.innerText = "";
-            const prompt = `Generate an adapted version of the recipe found at ${recipeLink.value} that meets the following dietary restrictions or preferences: ${dietaryRestrictions.value}.`;
 
-            console.log(prompt);
+            const recipeLink = document.getElementById('recipe-link').value;
+            const restrictions = document.getElementById('restrictions').value;
+            /* Code to refine the recipe as per the restrictions and preferences can be added here. */
 
-            const ws = new WebSocket(
-                `wss://backend.buildpicoapps.com/ask_ai_streaming?app_id=trip-less&prompt=${encodeURIComponent(prompt)}`
-            );
+            /* Display the refined recipe on the page */
+            /* For example: */
+            document.getElementById('output').innerText = "Refined Recipe:";
+        };
 
-            ws.addEventListener("message", (event) => {
-                console.log(event.data);
-                output.innerText = `${output.innerText}${event.data}`;
-            });
+        const initialize = () => {
+            welcomeAnimation();
+            document.getElementById('recipe-form').addEventListener('submit', sendRequest);
+        };
 
-            ws.addEventListener("close", (event) => {
-                console.log("Connection closed", event.code, event.reason);
-                if (event.code != 1000) {
-                    alert("Oops, we ran into an error. Refresh the page and try again.");
-                }
-            });
-
-            ws.addEventListener("error", (error) => {
-                console.log("WebSocket error", error);
-                alert("Oops, we ran into an error. Refresh the page and try again.");
-            });
-        });
+        initialize();
     </script>
 </body>
 </html>
