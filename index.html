@@ -4,22 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.3/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Courier New', Courier, monospace;
-        }
-        .retro-button {
-            background-color: #FFD700;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 2px 2px 2px black;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .retro-button:hover {
-            background-color: #FFA500;
-        }
-    </style>
     <title>Recipe Modification</title>
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col text-black">
@@ -37,7 +21,7 @@
             <input type="text" id="recipe-link" placeholder="Recipe Link" class="bg-gray-200 rounded p-2 w-full">
             <label for="dietary-preferences" class="text-lg">Dietary Restrictions/Preferences:</label>
             <input type="text" id="dietary-preferences" class="bg-gray-200 rounded p-2 w-full" placeholder="Enter your dietary restrictions/preferences">
-            <button type="submit" class="retro-button">Modify that tasty recipe!</button>
+            <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2">Modify that tasty recipe!</button>
         </form>
         <section id="output" class="mt-8 bg-gray-200 p-4 rounded"></section>
     </main>
@@ -83,3 +67,4 @@
         });
     </script>
 </body>
+</html>
