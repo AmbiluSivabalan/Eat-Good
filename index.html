@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.3/dist/tailwind.min.css" rel="stylesheet">
+    <!-- ... Rest of the head section ... -->
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f3f2e8;
-            margin: 0;
-            height: 100vh;
-            min-height: 100%;
-        }
+        /* ... Rest of the styles ... */
+
+        /* Add the animation styles */
         @keyframes slideUp {
             0% {
                 transform: translateY(0%);
@@ -22,78 +16,44 @@
                 opacity: 0;
             }
         }
+
         .animate-slide-up {
             animation: slideUp 2s forwards;
         }
-        .welcome-text {
-            font-weight: 300;
-            font-size: 1.5rem;
-        }
-        .welcome-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            width: 100%;
-        }
+
+        /* ... Rest of the styles ... */
     </style>
-    <title>RecipeRefined</title>
 </head>
-<body class="text-black">
-    <div id="welcome" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-opacity-100 bg-white">
+<body>
+    <!-- Add the home page section -->
+    <div id="welcome" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-opacity-100 bg-white animate-slide-up">
         <div class="welcome-container">
-            <h1 class="welcome-text mb-4" style="color: black;">Eat Food</h1>
-            <h2 class="welcome-text" style="color: green;">Might as well Eat Good</h2>
+            <h1 class="welcome-text mb-4" style="color: black;">Recipe Adaptation</h1>
+            <form id="home-form" class="w-full max-w-lg mx-auto">
+                <div class="py-2">
+                    <label for="home-link" class="block">Welcome to Recipe Adaptation for Dietary Restrictions</label>
+                    <input id="home-link" class="w-full mt-1 p-1 border border-black bg-white" type="text" required>
+                </div>
+                <div class="py-2">
+                    <button type="button" class="px-4 py-2 rounded text-white button-color hover:bg-white hover:text-black hover:border-beb7a4" onclick="showMainPage()">Get Started</button>
+                </div>
+            </form>
         </div>
     </div>
-    <header class="mt-10 mb-4 px-4">
-        <h1 class="text-4xl font-bold">
-            <span class="text-black">Recipe</span><span class="text-green-500">Refined</span>
-        </h1>
-    </header>
-    <div class="container mx-auto px-4">
-        <form id="recipe-form" class="mb-6">
-            <div>
-                <label for="recipe-link" class="block mb-2" style="color:black">Link to the Recipe:</label>
-                <input id="recipe-link" type="url" class="block w-full p-2 border border-gray-600 rounded" required>
-            </div>
-            <div class="mt-6">
-                <label for="restrictions" class="block mb-2" style="color:black;">Dietary Restrictions/Preferences:</label>
-                <input id="restrictions" type="text" class="block w-full p-2 border border-gray-600 rounded" required>
-            </div>
-            <button type="submit" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded text-white mt-6">Refine My Recipe!</button>
-        </form>
-        <pre id="output" class="bg-gray-800 rounded p-4 text-white mb-6"></pre>
-        <footer class="text-center">
-            <a href="#" class="text-red-500">Made with ❤️</a>
-        </footer>
-    </div>
+
+    <!-- ... Rest of the code ... -->
+
     <script>
-        const welcomeAnimation = () => {
-            setTimeout(() => {
-                document.getElementById('welcome').classList.add('animate-slide-up');
-            }, 1000);
+        // ... Rest of the code ...
+
+        // Function to show the main page and hide the welcome page
+        const showMainPage = () => {
+            const welcomePage = document.getElementById("welcome");
+            const mainPage = document.getElementById("main-page");
+
+            welcomePage.style.display = "none"; // Hide the welcome page
+            mainPage.style.display = "block"; // Show the main page
         };
-
-        const sendRequest = (event) => {
-            event.preventDefault();
-
-            const recipeLink = document.getElementById('recipe-link').value;
-            const restrictions = document.getElementById('restrictions').value;
-            /* Code to refine the recipe as per the restrictions and preferences can be added here. */
-
-            /* Display the refined recipe on the page */
-            /* For example: */
-            document.getElementById('output').innerText = 'output';
-        };
-
-        const initialize = () => {
-            welcomeAnimation();
-            document.getElementById('recipe-form').addEventListener('submit', sendRequest);
-        };
-
-        initialize();
     </script>
 </body>
 </html>
