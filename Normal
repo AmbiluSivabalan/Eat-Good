@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.3/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Recipe Adaptation</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fffffc;
+        }
+        h1 {
+            font-size: 2rem;
+            color: #000000;
+        }
+        label, input, textarea {
+            color: #000000;
+        }
+        .footer-link {
+            color: #000000;
+            text-decoration: underline;
+        }
+        .button-color {
+          background-color: #000000;
+          color: #fffffc;
+          border: 2px solid #beb7a4;
+        }
+        .button-hover {
+          background-color: #fffffc;
+          color: #000000;
+          border: 2px solid #beb7a4;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container mx-auto px-4">
+        <h1 class="text-center my-12">Recipe Adaptation for Dietary Restrictions</h1>
+        <form id="recipe-form" class="w-full max-w-lg mx-auto">
+            <div class="py-2">
+                <label for="recipe-link" class="block">Link to the Recipe</label>
+                <input id="recipe-link" class="w-full mt-1 p-1 border border-black bg-white" type="text" required>
+            </div>
+            <div class="py-2">
+                <label for="dietary-restrictions" class="block">Dietary Restrictions or Preferences</label>
+                <textarea id="dietary-restrictions" class="w-full mt-1 p-1 border border-black bg-white h-20" required></textarea>
+            </div>
+            <div class="py-2">
+                <button type="submit" class="px-4 py-2 rounded text-white button-color hover:bg-white hover:text-black hover:border-beb7a4">Cook up some magic! 🧙</button>
+            </div>
+        </form>
+        <div class="output my-8 p-4 w-full max-w-lg mx-auto border border-black bg-white">
+            <!-- Output data will be appended here -->
+        </div>
+        <footer class="text-center my-8">
+            <a href="#" class="footer-link">Made with ❤️</a>
+        </footer>
+    </div>
+    <script>
+        const form = document.getElementById("recipe-form");
+        const recipeLink = document.getElementById("recipe-link");
+        const dietaryRestrictions = document.getElementById("dietary-restrictions");
+        const output = document.querySelector(".output");
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            output.innerText = "";
+            const prompt = `Generate an adapted version of the recipe found at ${recipeLink.value} that meets the following dietary restrictions or preferences: ${dietaryRestrictions.value}.`;
+
+            console.log(prompt);
+
+            const ws = new WebSocket(
+                `wss://backend.buildpicoapps.com/ask_ai_streaming?app_id=trip-less&prompt=${encodeURIComponent(prompt)}`
+            );
+
+            ws.addEventListener("message", (event) => {
+                console.log(event.data);
+                output.innerText = `${output.innerText}${event.data}`;
+            });
+
+            ws.addEventListener("close", (event) => {
+                console.log("Connection closed", event.code, event.reason);
+                if (event.code != 1000) {
+                    alert("Oops, we ran into an error. Refresh the page and try again.");
+                }
+            });
+
+            ws.addEventListener("error", (error) => {
+                console.log("WebSocket error", error);
+                alert("Oops, we ran into an error. Refresh the page and try again.");
+            });
+        });
+    </script>
+</body>
+</html>
