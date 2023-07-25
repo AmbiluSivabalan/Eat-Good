@@ -30,7 +30,7 @@
         }
 
         #splash {
-          transition: transform 1.5s ease-in-out;
+          transition: transform 0.5s ease-in-out;
         }
 
         /* ... Rest of the styles ... */
@@ -87,7 +87,7 @@
         }
 
         async function onAnimationEnd() {
-            await sleep(100000);
+            await sleep(1000);
             document.getElementById("splash").style.transform = "translateY(-100%)";
             document.getElementById("main").classList.remove("hidden");
         }
