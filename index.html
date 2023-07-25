@@ -1,113 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      overflow: hidden;
-    }
-
-    .home-page {
-      height: 100vh;
-      background-color: #f9f5eb; /* Cream background color */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 24px;
-      color: black;
-      font-family: Arial, sans-serif;
-      animation: swipeUp 1s ease-out;
-    }
-
-    @keyframes swipeUp {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-100%);
-      }
-    }
-
-    /* Optional styling for the main page */
-    .main-page {
-      display: none; /* Hide the main page initially */
-    }
-  </style>
-</head>
-<body>
-  <!-- Home Page -->
-  <div class="home-page">
-    <div>
-      <p>Eat Food? Might as well Eat Good</p>
-    </div>
-  </div>
-
-  <!-- Main Page -->
-  <div class="main-page" id="mainPage">
-   html, body {
-      height: 100%;
-      margin: 0;
-      overflow: hidden;
-    }
-
-    .home-page {
-      height: 50vh;
-      background-color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 24px;
-      color: black;
-      font-family: Arial, sans-serif;
-      animation: swipeUp 1s ease-out;
-    }
-
-    @keyframes swipeUp {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-100%);
-      }
-    }
-  </style>
-</head>
-<body>
-  <!-- Home Page -->
-  <div class="home-page">
-    <div>
-      <p>eat food? eat good</p>
-    </div>
-  </div>
-
-  <!-- Your existing HTML code for the main page comes here -->
-  <div class="main-page" id="mainPage">
-    <!-- Add content for the main page here -->
-  </div>
-
-  <!-- Add the swipe-up JavaScript code here -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const homePage = document.querySelector(".home-page");
-      const mainPage = document.querySelector(".main-page");
-
-      let startY = 0;
-      let endY = 0;
-
-      homePage.addEventListener("touchstart", function(e) {
-        startY = e.touches[0].clientY;
-      });
-
-      homePage.addEventListener("touchend", function(e) {
-        endY = e.changedTouches[0].clientY;
-
-        if (endY < startY) {
-          homePage.style.display = "none";
-          mainPage.style.display = "block";
-        }
-      });
-    });
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.3/dist/tailwind.min.css" rel="stylesheet">
@@ -162,7 +55,7 @@
             <!-- Output data will be appended here -->
         </div>
         <footer class="text-center my-8">
-          
+            <a href="#" class="footer-link">Made with ❤️</a>
         </footer>
     </div>
     <script>
@@ -199,35 +92,6 @@
                 alert("Oops, we ran into an error. Refresh the page and try again.");
             });
         });
-
-  </div>
-
-  <!-- Add the swipe-up JavaScript code here -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const homePage = document.querySelector(".home-page");
-      const mainPage = document.querySelector(".main-page");
-
-      let startY = 0;
-      let endY = 0;
-
-      homePage.addEventListener("touchstart", function(e) {
-        startY = e.touches[0].clientY;
-      });
-
-      homePage.addEventListener("touchend", function(e) {
-        endY = e.changedTouches[0].clientY;
-
-        if (endY < startY) {
-          homePage.style.display = "none";
-          mainPage.style.display = "block";
-        }
-      });
-    });
-  </script>
+    </script>
 </body>
 </html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
