@@ -3,111 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.3/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.3/dist/tailwind.min.css">
+    <title>RecipeReference</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
-
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-
-        .apple-text {
-            font-weight: 500;
-            font-size: 1.125rem;
-        }
-
-        .apple-text-lg {
-            font-weight: 500;
-            font-size: 1.875rem;
-        }
-
-        .apple-text-black {
-            color: #333;
-        }
-
-        .apple-text-green {
-            color: #52d63a;
-        }
-
-        #splash {
-          transition: transform 0.0s ease-in-out;
-        }
-
-        /* ... Rest of the styles ... */
-
-        /* Add styles to the output box */
-        #output {
-            max-width: 100%;
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-            word-break: break-word;
+        .apple-font {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         }
     </style>
-    <title>RecipeReference</title>
 </head>
-<body class="bg-cream-300">
-    <div class="bg-cream-300 w-full min-h-screen">
-        <div id="splash" class="fixed top-0 left-0 w-full h-full flex items-center justify-center">
-            <div class="text-center">
-                <p class="apple-text-lg apple-text-black">Eat Food?</p>
-                <p class="apple-text-lg apple-text-green">Might as well Eat Good</p>
-            </div>
-        </div>
-        <div id="main" class="hidden flex flex-col items-center min-h-screen p-8">
-            <h1 class="mt-12 text-4xl font-bold">
-                <span class="apple-text-black">Recipe</span>
-                <span class="apple-text-green">Reference</span>
-            </h1>
+<body class="bg-white text-gray-600 apple-font leading-normal">
 
-            <form id="recipe-form" class="mt-12 w-full max-w-md">
-                <div class="mb-4">
-                    <label for="recipe-link" class="block text-base font-semibold mb-2 apple-text-black">Link to the Recipe</label>
-                    <input type="text" name="recipe-link" id="recipe-link" class="w-full p-2 border-2 border-gray-400 rounded-md" required>
-                </div>
-
-                <div class="mb-4">
-                    <label for="dietary-restrictions" class="block text-base font-semibold mb-2 apple-text-black">Dietary Restrictions/Preferences</label>
-                    <input type="text" name="dietary-restrictions" id="dietary-restrictions" class="w-full p-2 border-2 border-gray-400 rounded-md" required>
-                </div>
-
-                <button type="submit" class="w-full py-3 mt-4 bg-green-600 text-white font-bold rounded-md">Adapt My Recipe!</button>
-            </form>
-
-            <pre id="output" class="mt-12 w-full max-w-md apple-text p-4 border-2 border-gray-300 rounded-md bg-gray-100"></pre>
-            
-            <footer class="mt-auto mb-4 text-center">
-            </footer>
+    <div id="home" class="fixed inset-0 flex items-center justify-center text-center h-screen w-screen bg-cream bg-opacity-100">
+        <div>
+            <h1 class="text-xl text-black">Eat Food?</h1>
+            <h2 class="text-lg text-green-600">Might as well Eat Good</h2>
         </div>
     </div>
 
+    <header class="py-4 bg-gray-100 text-gray-700">
+        <h1 class="text-center text-3xl"><span class="text-black">Recipe</span><span class="text-green-600">Reference</span></h1>
+    </header>
+
+    <main class="container mx-auto py-4 px-4">
+        <form id="recipe-form" class="space-y-4">
+            <label for="recipe-link">Recipe Link</label>
+            <input type="url" id="recipe-link" class="block w-full p-2 border border-gray-300 rounded" required>
+            
+            <label for="dietary-preferences">Dietary Preferences</label>
+            <input type="text" id="dietary-preferences" class="block w-full p-2 border border-gray-300 rounded" required>
+
+            <button type="submit" class="bg-green-600 text-white py-2 px-4 rounded">Let's Cook Healthy!</button>
+            <button type="button" id="save-recipe" class="bg-blue-600 text-white py-2 px-4 rounded disabled:opacity-50" disabled>Save Recipe</button>
+            <button type="button" id="saved-recipes" class="bg-yellow-600 text-white py-2 px-4 rounded">Saved Recipes (<span id="saved-recipes-counter">0</span>)</button>
+        </form>
+        <section id="output" class="mt-8 p-4 border border-gray-200 rounded text-lg"></section>
+
+        <section id="saved-recipes-list" class="hidden">
+            <h2 class="text-3xl mb-4">Saved Recipes</h2>
+            <ul id="recipes-list" class=""></ul>
+        </section>
+    </main>
+
+    <footer class="py-4 bg-gray-100 text-center">
+        <a href="#" class="inline-flex items-center text-sm text-gray-500">
+            Made with ❤️
+        </a>
+    </footer>
+
     <script>
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
+        document.addEventListener("DOMContentLoaded", () => {
+            const home = document.getElementById("home");
+            setTimeout(() => {
+                home.style.transition = "transform 1s";
+                home.style.transform = "translateY(-100%)";
+                setTimeout(() => {
+                    home.style.display = "none";
+                    document.body.style.backgroundColor = "var(--cream)";
+                }, 1000);
+            }, 1000);
+        });
 
-        async function onAnimationEnd() {
-            await sleep(1000);
-            document.getElementById("splash").style.transform = "translateY(-100%)";
-            document.getElementById("main").classList.remove("hidden");
-        }
-
-        onAnimationEnd();
-
-        const form = document.getElementById("recipe-form");
-        const output = document.getElementById("output");
-
-        form.addEventListener("submit", (event) => {
+        document.getElementById("recipe-form").addEventListener("submit", (event) => {
             event.preventDefault();
-
-            const link = document.getElementById("recipe-link").value;
-            const restrictions = document.getElementById("dietary-restrictions").value;
-
-            const prompt = `Generate an adapted version of the recipe from ${link} considering the dietary restrictions/preferences ${restrictions}.`;
+            let recipeLink = document.getElementById("recipe-link").value;
+            let dietaryPreferences = document.getElementById("dietary-preferences").value;
+            let prompt = `Convert the recipe at ${recipeLink} to accommodate the following dietary preferences: ${dietaryPreferences}. Please provide an adjusted version of the recipe that meets these restrictions and preferences.`;
 
             console.log(prompt);
-            output.innerText = "";
 
-            const ws = new WebSocket(`wss://backend.buildpicoapps.com/ask_ai_streaming?app_id=significant-clear&prompt=${encodeURIComponent(prompt)}`);
+            const output = document.getElementById("output");
+            output.innerText = "";
+            document.getElementById("save-recipe").disabled = true;
+
+            const ws = new WebSocket(`wss://backend.buildpicoapps.com/ask_ai_streaming?app_id=firm-determine&prompt=${encodeURIComponent(prompt)}`);
+
             ws.addEventListener("message", (event) => {
                 console.log(event.data);
                 output.innerText = `${output.innerText}${event.data}`;
@@ -117,6 +86,8 @@
                 console.log("Connection closed", event.code, event.reason);
                 if (event.code != 1000) {
                     alert("Oops, we ran into an error. Refresh the page and try again.");
+                } else {
+                    document.getElementById("save-recipe").disabled = false;
                 }
             });
 
@@ -125,6 +96,39 @@
                 alert("Oops, we ran into an error. Refresh the page and try again.");
             });
         });
+
+        document.getElementById("save-recipe").addEventListener("click", () => {
+            const output = document.getElementById("output").innerText;
+            let savedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
+            savedRecipes.push(output);
+            localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
+            updateSavedRecipesCounter();
+            alert("Recipe saved!");
+        });
+
+        document.getElementById("saved-recipes").addEventListener("click", () => {
+            let savedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
+
+            const savedRecipesList = document.getElementById("saved-recipes-list");
+            const recipesList = document.getElementById("recipes-list");
+            recipesList.innerHTML = "";
+
+            savedRecipes.forEach((recipe, index) => {
+                const listItem = document.createElement("li");
+                listItem.classList.add("py-2");
+                listItem.innerText = `Recipe ${index+1}: ${recipe}`;
+                recipesList.appendChild(listItem);
+            });
+
+            savedRecipesList.classList.toggle("hidden");
+        });
+
+        function updateSavedRecipesCounter() {
+            let savedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
+            document.getElementById("saved-recipes-counter").innerText = savedRecipes.length;
+        }
+
+        updateSavedRecipesCounter();
     </script>
 </body>
 </html>
